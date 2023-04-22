@@ -1,0 +1,9 @@
+appName: "simplecloud"
+replicas: 1
+
+image: "registry.registry.svc.cluster.local:5000/simplecloud3:latest"
+
+service:
+  rest:
+    type: "NodePort"
+    nodPort: 30008

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      serviceAccountName: {{ .Values.appName }}
+      containers:
+        - name: default
+          image: {{ .Values.image }}
+          ports:
+            - containerPort: 8008
+          env:
+            - name: SELF_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: REBUILD_REGISTRY
+              value: {{ .Values.init.registry }}
+            - name: BUILDKIT_ADDR
+              value: {{ .Values.init.buildkit }}
+            - name: INIT_USER_NAME
+              value: {{ .Values.init.user.name }}
+            - name: INIT_USER_UUID
+              value: {{ .Values.init.user.uuid }}
+            - name: INIT_USER_PASSWORD
+              value: {{ .Values.init.user.password }}
+            - name: INIT_DB_CONNECTION
+              value: {{ .Values.init.mongo }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest
+spec:
+  type: {{ .Values.service.rest.type }}
+  selector:
+    app: {{ .Values.appName }}
+  ports:
+    - protocol: TCP
+      port: 8008
+      targetPort: 8008
+      nodePort: {{ .Values.service.rest.nodePort }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: distribution
+spec:
+  selector:
+    app: {{ .Values.appName }}
+  ports:
+    - protocol: TCP
+      port: 1670
+      targetPort: 1670
