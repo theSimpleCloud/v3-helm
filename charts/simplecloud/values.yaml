@@ -6,4 +6,4 @@ image: "registry.registry.svc.cluster.local:5000/simplecloud3:latest"
 service:
   rest:
     type: "NodePort"
-    nodPort: 30008
+    nodePort: 30008
