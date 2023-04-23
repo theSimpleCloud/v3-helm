@@ -10,22 +10,32 @@ rules:
       - create
       - update
       - delete
-      - exec
       - patch
     apiGroups:
       - ''
       - apps
-      - rbac.authorization.k8s.io
     resources:
       - pods
       - pods/log
       - pods/status
+      - pods/exec
       - services
       - secrets
       - configmaps
       - persistentvolumes
       - persistentvolumeclaims
       - serviceaccounts
+      - deployments
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - delete
+      - patch
+    apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
       - roles
       - rolebindings
-      - deployments
