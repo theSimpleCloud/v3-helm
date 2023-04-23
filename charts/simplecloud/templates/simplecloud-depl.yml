@@ -14,7 +14,7 @@ spec:
       labels:
         app: {{ .Values.appName }}
     spec:
-      serviceAccountName: {{ .Values.appName }}
+      serviceAccountName: simplecloud
       containers:
         - name: default
           image: {{ .Values.image }}
