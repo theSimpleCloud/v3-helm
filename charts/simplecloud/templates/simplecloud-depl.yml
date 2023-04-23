@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.appName }}
+  name: { { .Values.appName } }
   labels:
-    app: {{ .Values.appName }}
+    app: { { .Values.appName } }
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: { { .Values.replicas } }
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
-      app: {{ .Values.appName }}
+      app: { { .Values.appName } }
   template:
     metadata:
       labels:
-        app: {{ .Values.appName }}
+        app: { { .Values.appName } }
     spec:
       serviceAccountName: simplecloud
-      strategy:
-        type: Recreate
       containers:
         - name: default
-          image: {{ .Values.image }}
+          image: { { .Values.image } }
           ports:
             - containerPort: 8008
           env:
@@ -28,17 +28,17 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
             - name: REBUILD_REGISTRY
-              value: {{ .Values.init.registry }}
+              value: { { .Values.init.registry } }
             - name: BUILDKIT_ADDR
-              value: {{ .Values.init.buildkit }}
+              value: { { .Values.init.buildkit } }
             - name: INIT_USER_NAME
-              value: {{ .Values.init.user.name }}
+              value: { { .Values.init.user.name } }
             - name: INIT_USER_UUID
-              value: {{ .Values.init.user.uuid }}
+              value: { { .Values.init.user.uuid } }
             - name: INIT_USER_PASSWORD
-              value: {{ .Values.init.user.password }}
+              value: { { .Values.init.user.password } }
             - name: INIT_DB_CONNECTION
-              value: {{ .Values.init.mongo }}
+              value: { { .Values.init.mongo } }
 
 ---
 apiVersion: v1
@@ -46,14 +46,14 @@ kind: Service
 metadata:
   name: rest
 spec:
-  type: {{ .Values.service.rest.type }}
+  type: { { .Values.service.rest.type } }
   selector:
-    app: {{ .Values.appName }}
+    app: { { .Values.appName } }
   ports:
     - protocol: TCP
       port: 8008
       targetPort: 8008
-      nodePort: {{ .Values.service.rest.nodePort }}
+      nodePort: { { .Values.service.rest.nodePort } }
 ---
 apiVersion: v1
 kind: Service
@@ -61,7 +61,7 @@ metadata:
   name: distribution
 spec:
   selector:
-    app: {{ .Values.appName }}
+    app: { { .Values.appName } }
   ports:
     - protocol: TCP
       port: 1670
