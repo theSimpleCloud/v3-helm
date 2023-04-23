@@ -3,6 +3,16 @@ entries:
   simplecloud:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2023-04-23T11:32:36.924442966Z"
+    description: SimpleCloud Helm Chart
+    digest: 531166967a4bdbfbbdc9de8a017f7705afead5022d6b5af3b551994a1ffa683e
+    name: simplecloud
+    type: application
+    urls:
+    - https://github.com/theSimpleCloud/v3-helm/releases/download/simplecloud-0.1.1/simplecloud-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2023-04-22T12:29:35.666976637Z"
     description: SimpleCloud Helm Chart
     digest: e1e5081d73c39a650c52ecfb5084abc4ea8726ccc2bc9073fd8a2bd379107325
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/theSimpleCloud/v3-helm/releases/download/simplecloud-0.1.0/simplecloud-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-22T12:29:35.666982437Z"
+generated: "2023-04-23T11:32:36.924452266Z"
