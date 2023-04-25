@@ -39,6 +39,8 @@ spec:
               value: {{ .Values.init.user.password }}
             - name: INIT_DB_CONNECTION
               value: {{ .Values.init.mongo }}
+            - name: HELM_VERSION
+              value: { { .Values.chartVersion } }
 
 ---
 apiVersion: v1

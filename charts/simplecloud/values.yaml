@@ -1,4 +1,6 @@
 appName: "simplecloud"
+#Duplicate of version in Chart.yaml
+chartVersion: 0.1.6
 replicas: 1
 
 image: "registry.registry.svc.cluster.local:5000/simplecloud3:latest"
